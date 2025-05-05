@@ -2,7 +2,6 @@ package com.example.calculadora
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Size
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.calculadora.databinding.ActivityMainBinding
@@ -14,8 +13,8 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
-    private var expressaoParaCalculo = ""
-    private var expressaoVisivel = ""
+    private var expressaoCalculo = ""
+    private var expressaoVisualizacao = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,10 +56,10 @@ class MainActivity : AppCompatActivity() {
                         else -> "" to ""
                     }
 
-                    expressaoParaCalculo += valorCalculo
-                    expressaoVisivel += valorVisivelItem
+                    expressaoCalculo += valorCalculo
+                    expressaoVisualizacao += valorVisivelItem
 
-                    txtExpressao.text = expressaoVisivel
+                    txtExpressao.text = expressaoVisualizacao
                     atualizarResultadoParcial()
                 }
             }
@@ -71,41 +70,47 @@ class MainActivity : AppCompatActivity() {
         with(binding) {
             btnIgualdade.setOnClickListener {
                 try {
-                    val resultado = ExpressionBuilder(expressaoParaCalculo).build().evaluate()
+                    val resultado = ExpressionBuilder(expressaoCalculo).build().evaluate()
 
-                    if (resultado.isInfinite() || resultado.isNaN()) {
-                        throw ArithmeticException("Não é possível dividir por zero")
+                    if (!resultado.isFinite()) {
+                        txtResultado.text = "Não é possível dividir por zero"
+                        txtResultado.setTextColor(Color.RED)
+                    } else {
+                        val resultadoFormatado = if (resultado % 1 == 0.0 && !expressaoCalculo.contains(".")) {
+                            resultado.toInt().toString()
+                        } else {
+                            resultado.toString()
+                        }
+
+                        txtResultado.text = "= $resultadoFormatado"
+                        txtResultado.setTextColor(Color.WHITE)
+                        txtExpressao.setTextColor(Color.GRAY)
                     }
 
-                    txtResultado.text = "= $resultado"
-                    txtResultado.setTextColor(Color.WHITE)
-                    txtExpressao.setTextColor(Color.GRAY)
                     txtResultado.visibility = View.VISIBLE
-                } catch (e: ArithmeticException) {
-                    txtResultado.text = e.message
-                    txtResultado.setTextColor(Color.RED)
-                    txtResultado.visibility = View.VISIBLE
+
                 } catch (e: Exception) {
-                    txtResultado.text = "Erro"
+                    txtResultado.text = "Não é possível dividir por zero"
                     txtResultado.setTextColor(Color.RED)
                     txtResultado.visibility = View.VISIBLE
                 }
             }
 
 
+
             btnLimpar.setOnClickListener {
-                expressaoParaCalculo = ""
-                expressaoVisivel = ""
+                expressaoCalculo = ""
+                expressaoVisualizacao = ""
                 txtExpressao.text = ""
                 txtResultado.text = ""
                 txtResultado.visibility = View.GONE
             }
 
             btnApagar.setOnClickListener {
-                if (expressaoParaCalculo.isNotEmpty() && expressaoVisivel.isNotEmpty()) {
-                    expressaoParaCalculo = expressaoParaCalculo.dropLast(1)
-                    expressaoVisivel = expressaoVisivel.dropLast(1)
-                    txtExpressao.text = expressaoVisivel
+                if (expressaoCalculo.isNotEmpty() && expressaoVisualizacao.isNotEmpty()) {
+                    expressaoCalculo = expressaoCalculo.dropLast(1)
+                    expressaoVisualizacao = expressaoVisualizacao.dropLast(1)
+                    txtExpressao.text = expressaoVisualizacao
                     atualizarResultadoParcial()
                 }
             }
@@ -114,9 +119,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun atualizarResultadoParcial() {
         try {
-            val resultado = ExpressionBuilder(expressaoParaCalculo).build().evaluate()
+            val resultado = ExpressionBuilder(expressaoCalculo).build().evaluate()
 
-            val resultadoFormatado = if (resultado % 1 == 0.0 && !expressaoParaCalculo.contains(".")) {
+            val resultadoFormatado = if (resultado % 1 == 0.0 && !expressaoCalculo.contains(".")) {
                 resultado.toInt().toString()
             } else {
                 resultado.toString()
