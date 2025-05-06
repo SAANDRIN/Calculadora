@@ -13,4 +13,4 @@ _**Tela inicial**_
 
 _**Tratamento de erros (exceção)**_
 
-![calculo 1](https://github.com/SAANDRIN/ImagensConjunto/blob/main/Screenshot_2025-05-06-13-56-10-313_com.example.calculadora.jpg)
+![erro](https://github.com/SAANDRIN/ImagensConjunto/blob/main/Screenshot_2025-05-06-13-56-31-609_com.example.calculadora.jpg)
