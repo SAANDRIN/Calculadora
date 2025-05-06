@@ -4,13 +4,12 @@ _**- Aplicativo criado com o intuito de explorar a desestruturação de pares (P
 
 _**Imagens Demonstrativas**_
 
-
 _**Tela inicial**_
 
-![Tela Inicial](https://github.com/SAANDRIN/ImagensConjunto/blob/main/Screenshot_2025-05-06-13-56-10-313_com.example.calculadora.jpg)
+<img src="https://github.com/SAANDRIN/ImagensConjunto/blob/main/Screenshot_2025-05-06-13-56-10-313_com.example.calculadora.jpg?raw=true" width="300"/>
 
-![calculo 1](https://github.com/SAANDRIN/ImagensConjunto/blob/main/Screenshot_2025-05-06-13-56-25-417_com.example.calculadora.jpg)
+<img src="https://github.com/SAANDRIN/ImagensConjunto/blob/main/Screenshot_2025-05-06-13-56-25-417_com.example.calculadora.jpg?raw=true" width="300"/>
 
 _**Tratamento de erros (exceção)**_
 
-![erro](https://github.com/SAANDRIN/ImagensConjunto/blob/main/Screenshot_2025-05-06-13-56-31-609_com.example.calculadora.jpg)
+<img src="https://github.com/SAANDRIN/ImagensConjunto/blob/main/Screenshot_2025-05-06-13-56-31-609_com.example.calculadora.jpg?raw=true" width="300"/>
